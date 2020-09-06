@@ -18,7 +18,7 @@ set autoindent
 set notimeout
 set wrap
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=100
 set foldenable
 set noshowmode
 set showcmd
@@ -35,7 +35,9 @@ set mouse=a
 
 " Terminal behavior
 syntax on
-colorscheme one
+set cursorline
+colorscheme onedark
+set background=dark
 
 " Mappings
 noremap Q :q<CR>
@@ -50,24 +52,11 @@ map <C-V> "+gP
 map <S-Insert> "+gP
 noremap <C-Z> u
 
-if !filereadable(vimplug_exists)
-  if !executable(curl_exists)
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  let g:not_finish_vimplug = "yes"
-  autocmd VimEnter * PlugInstall
-endif
-
 " Required:
 call plug#begin(expand('~/.config/nvim/plugged'))
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'joshdick/onedark.vim'
 Plug 'honza/vim-snippets'
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'hail2u/vim-css3-syntax'
@@ -75,6 +64,10 @@ Plug 'mattn/emmet-vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'posva/vim-vue'
 Plug 'leafOfTree/vim-vue-plugin'
+Plug 'preservim/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -133,3 +126,25 @@ augroup END
 " vuejs
 let g:vue_disable_pre_processors=1
 let g:vim_vue_plugin_load_full_syntax = 1
+
+" nerdtree
+autocmd vimenter * NERDTree
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+nnoremap <C-B> :NERDTreeToggle<CR>
+
+let NERDTreeWinPos='left'
+let NERDTreeWinSize=24
+
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" coc.nvim
+let g:coc_global_extensions = ['coc-html','coc-css', 'coc-json',
+  \ 'coc-java','coc-calc','coc-clangd','coc-explorer',
+  \ 'coc-emmet','coc-snippets','coc-xml','coc-phpactor',
+  \ 'coc-markdownlint','coc-highlight','coc-snippets']
