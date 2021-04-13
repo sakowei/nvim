@@ -1,4 +1,4 @@
-# 我的 [Neovim](https://www.neowvim.io) 用户配置文件
+# 我的 [Neovim](https://www.neovim.io) 用户配置文件
 
 ````
     ___  ___ _____           _       ___  _____
