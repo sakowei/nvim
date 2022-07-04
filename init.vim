@@ -102,10 +102,7 @@ let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'readonly', 'filename', 'modified', 'helloworld' ] ]
-  \ },
-  \ 'component': {
-  \   'helloworld': '李智鹏是个大傻瓜'
-  \ },
+  \ }
 \ }
 
 command! FixWhitespace :%s/\s\+$//e
